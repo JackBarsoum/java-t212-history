@@ -11,7 +11,7 @@ To use the project it is very simple.
 - Type in the path and name of your csv file acquired from trading212's history option
 
 ### Credits  
-*To be filled in later*
-
+Jack Barsoum  
+Oisin Lynch
 
 
