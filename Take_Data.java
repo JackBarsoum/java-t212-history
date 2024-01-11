@@ -6,122 +6,237 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-
-class Take_Data {
-
-    private static ArrayList<String> action = new ArrayList<>();
-    private static ArrayList<String> time = new ArrayList<>();
-    private static ArrayList<String> ISIN = new ArrayList<>();
-    private static ArrayList<String> ticker = new ArrayList<>();
-    private static ArrayList<String> name = new ArrayList<>();
-    private static ArrayList<Double> noOfShares = new ArrayList<>();
-    private static ArrayList<Double> pricePerShare = new ArrayList<>();
-    private static ArrayList<String> currency= new ArrayList<>();
-    private static ArrayList<Double> exchangeRate = new ArrayList<>();
-    private static ArrayList<Double> result = new ArrayList<>();
-    private static ArrayList<String> currencyofResult = new ArrayList<>();
-    private static ArrayList<Double> total = new ArrayList<>();
-    private static ArrayList<String> currencyofTotal = new ArrayList<>();
-    private static ArrayList<Double> withholdingTax = new ArrayList<>();
-    private static ArrayList<String> currencyofWithholdingTax = new ArrayList<>();
-    private static ArrayList<Double> stampDutyReserveTax = new ArrayList<>();
-    private static ArrayList<String> currencyofStampDutyReserveTax = new ArrayList<>();
-    private static ArrayList<String> notes = new ArrayList<>();
-    private static ArrayList<String> ID = new ArrayList<>();
-    private static ArrayList<Double> currencyConversionFee = new ArrayList<>();
-    private static ArrayList<String> currencyCurrencyConversionFee = new ArrayList<>();
-
-    public static void addAction(String newAction) {
-        action.add(newAction);
+public class Take_Data {
+    //                  GETTER AND SETTER METHODS
+    public void setAction(String action) {
+        this.action = action;
     }
 
-    public static void addTime(String newTime) {
-        time.add(newTime);
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public static void addISIN(String newISIN) {
-        ISIN.add(newISIN);
+    public void setISIN(String ISIN) {
+        this.ISIN = ISIN;
     }
 
-    public static void addTicker(String newTicker) {
-        ticker.add(newTicker);
-    }
-
-    public static void addName(String newName) {
-        name.add(newName);
-    }
-
-    public static void addNoOfShares(Double newNoOfShares) {
-        noOfShares.add(newNoOfShares);
-    }
-
-    public static void addPricePerShare(Double newPricePerShare) {
-        pricePerShare.add(newPricePerShare);
-    }
-
-    public static void addCurrencyPricePerShare(String newCurrencyPricePerShare) {
-        currency.add(newCurrencyPricePerShare);
-    }
-
-    public static void addExchangeRate(Double newExchangeRate) {
-        exchangeRate.add(newExchangeRate);
-    }
-
-    public static void addResult(Double newResult) {
-        result.add(newResult);
-    }
-
-    public static void addCurrencyResult(String newCurrencyResult) {
-        currencyofResult.add(newCurrencyResult);
-    }
-
-    public static void addTotal(Double newTotal) {
-        total.add(newTotal);
-    }
-
-    public static void addCurrencyTotal(String newCurrencyTotal) {
-        currencyofTotal.add(newCurrencyTotal);
-    }
-
-    public static void addWithholdingTax(Double newWithholdingTax) {
-        withholdingTax.add(newWithholdingTax);
-    }
-
-    public static void addCurrencyWithholdingTax(String newCurrencyWithholdingTax) {
-        currencyofWithholdingTax.add(newCurrencyWithholdingTax);
-    }
-
-    public static void addStampDutyReserveTax(Double newStampDutyReserveTax) {
-        stampDutyReserveTax.add(newStampDutyReserveTax);
-    }
-
-    public static void addCurrencyStampDutyReserveTax(String newCurrencyStampDutyReserveTax) {
-        currencyofStampDutyReserveTax.add(newCurrencyStampDutyReserveTax);
-    }
-
-    public static void addNotes(String newNotes) {
-        notes.add(newNotes);
-    }
-
-    public static void addID(String newID) {
-        ID.add(newID);
-    }
-
-    public static void addCurrencyConversionFee(Double newCurrencyConversionFee) {
-        currencyConversionFee.add(newCurrencyConversionFee);
-    }
-
-    public static void addCurrencyCurrencyConversionFee(String newCurrencyCurrencyConversionFee) {
-        currencyCurrencyConversionFee.add(newCurrencyCurrencyConversionFee);
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
 
-    public static void readFile() throws IOException {
-        String csvFile = "C:/Users/oisin/Downloads/2023-2024_trades.csv";
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNumOfShares(double numOfShares) {
+        this.numOfShares = numOfShares;
+    }
+
+    public void setPricePershare(double pricePershare) {
+        this.pricePershare = pricePershare;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setExchangeRate(double exchangeRate) {
+        this.exchangeRate = exchangeRate;
+    }
+
+    public void setResult(double result) {
+        this.result = result;
+    }
+
+    public void setCurrencyofResult(String currencyofResult) {
+        this.currencyofResult = currencyofResult;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void setCurrencyofTotal(String currencyofTotal) {
+        this.currencyofTotal = currencyofTotal;
+    }
+
+    public void setWithholdingTax(double withholdingTax) {
+        this.withholdingTax = withholdingTax;
+    }
+
+    public void setCurrencyofWithholdingTax(String currencyofWithholdingTax) {
+        this.currencyofWithholdingTax = currencyofWithholdingTax;
+    }
+
+    public void setStampDuty(double stampDuty) {
+        this.stampDuty = stampDuty;
+    }
+
+    public void setCurrencyofStampDuty(String currencyofStampDuty) {
+        this.currencyofStampDuty = currencyofStampDuty;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setConversionFee(double conversionFee) {
+        this.conversionFee = conversionFee;
+    }
+
+    public void setCurrencyConversionFee(String currencyConversionFee) {
+        this.currencyConversionFee = currencyConversionFee;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getISIN() {
+        return ISIN;
+    }
+
+    public String getTicker() {
+        return ticker;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getNumOfShares() {
+        return numOfShares;
+    }
+
+    public double getPricePershare() {
+        return pricePershare;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public double getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public double getResult() {
+        return result;
+    }
+
+    public String getCurrencyofResult() {
+        return currencyofResult;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public String getCurrencyofTotal() {
+        return currencyofTotal;
+    }
+
+    public double getWithholdingTax() {
+        return withholdingTax;
+    }
+
+    public String getCurrencyofWithholdingTax() {
+        return currencyofWithholdingTax;
+    }
+
+    public double getStampDuty() {
+        return stampDuty;
+    }
+
+    public String getCurrencyofStampDuty() {
+        return currencyofStampDuty;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public double getConversionFee() {
+        return conversionFee;
+    }
+
+    public String getCurrencyConversionFee() {
+        return currencyConversionFee;
+    }
+
+    //                      END OF GETTER AND SETTER METHODS
+
+    //Instance variables
+    private String action;
+    private String time;
+    private String ISIN;
+    private String ticker;
+    private String name;
+    private double numOfShares;
+    private double pricePershare;
+    private String currency;
+    private double exchangeRate;
+    private double result;
+    private String currencyofResult;
+    private double total;
+    private String currencyofTotal;
+    private double withholdingTax;
+    private String currencyofWithholdingTax;
+    private double stampDuty;
+    private String currencyofStampDuty;
+    private String notes;
+    private String ID;
+    private double conversionFee;
+    private String currencyConversionFee;
+
+
+    //Constructor
+    public Take_Data(String a, String t, String I, String tick, String n, double num,
+                     double pricep, String cur, double exc, double res, String curres, double tot, String curroft, double withtax,
+                     String curroftax, double stamp, String stampcur, String note, String identifier, double conversion, String currofConversion) {
+        this.action = a;
+        this.time = t;
+        this.ISIN = I;
+        this.ticker = tick;
+        this.name = n;
+        this.numOfShares = num;
+        this.pricePershare = pricep;
+        this.currency = cur;
+        this.exchangeRate = exc;
+        this.result = res;
+        this.currencyofResult = curres;
+        this.total = tot;
+        this.currencyofTotal = curroft;
+        this.withholdingTax = withtax;
+        this.currencyofWithholdingTax = curroftax;
+        this.stampDuty = stamp;
+        this.currencyofStampDuty = stampcur;
+        this.notes = note;
+        this.ID = identifier;
+        this.conversionFee = conversion;
+        this.currencyConversionFee = currofConversion;
+    }
+
+    public static ArrayList<Take_Data> readFile() throws IOException {
+        ArrayList<Take_Data> fullData = new ArrayList<Take_Data>();
+        String csvFile = "C:/Users/Jack Barsoum/IdeaProjects/T212/src";
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
         int count = 0;
-
+        Take_Data temp;
         // Skip the header line if present
         if (read.hasNextLine()) {
             read.nextLine();
@@ -130,83 +245,75 @@ class Take_Data {
         while (read.hasNextLine()) {
             String line = read.nextLine();
             String[] row = line.split(cvsSplitBy);
-            System.out.println(row.length);
-            addAction(row[0]);
-            addTime(row[1]);
-            addISIN(row[2]);
-            addTicker(row[3]);
-            addName(row[4]);
-            addNoOfShares(Double.parseDouble(row[5]));
-            addPricePerShare(Double.parseDouble(row[6]));
-            addCurrencyPricePerShare(row[7]);
+            //Create a new Take_Data some of the values are defaulted now and are set later after checks
+            temp = new Take_Data(row[0], row[1], row[2], row[3], row[4], Double.parseDouble(row[5]), Double.parseDouble(row[6]), row[7], -1, 0, row[10], Double.parseDouble(row[11]), row[12], 0, "", 0, "", "", row[18], 0, "");
             //if not avaible let exhange = -1
-            if(Objects.equals(row[8], "Not available")){
-                addExchangeRate(-1.0);
-            }else {
-                addExchangeRate(Double.parseDouble(row[8]));
+            if (Objects.equals(row[8], "Not available")) {
+                temp.setExchangeRate(-1);
+            } else {
+                temp.setExchangeRate(Double.parseDouble(row[8]));
             }
-            if(row[9].isEmpty()){
-                addResult(0.0);
-            }else {
-                addResult(Double.parseDouble(row[9]));
+            if (row[9].isEmpty()) {
+                temp.setResult(0.0);
+            } else {
+                temp.setResult(Double.parseDouble(row[9]));
             }
-            addCurrencyResult(row[10]);
-            addTotal(Double.parseDouble(row[11]));
-            addCurrencyTotal(row[12]);
-            if(row[13].isEmpty()){
-                addWithholdingTax(0.0);
-            }else {
-                addWithholdingTax(Double.parseDouble(row[13]));
+            if (row[13].isEmpty()) {
+                temp.setWithholdingTax(0.0);
+            } else {
+                temp.setWithholdingTax(Double.parseDouble(row[13]));
             }
-            if(row[14].isEmpty()){
-                addCurrencyWithholdingTax("");
-            }else {
-                addCurrencyWithholdingTax(row[14]);
+            if (row[14].isEmpty()) {
+                temp.setCurrencyofWithholdingTax("");
+            } else {
+                temp.setCurrencyofWithholdingTax(row[14]);
             }
-            if(row[15].isEmpty()){
-                addStampDutyReserveTax(0.0);
-            }else {
-                addStampDutyReserveTax(Double.parseDouble(row[15]));
+            if (row[15].isEmpty()) {
+                temp.setStampDuty(0.0);
+            } else {
+                temp.setStampDuty(Double.parseDouble(row[15]));
             }
-            if (row[16].isEmpty()){
-                addCurrencyStampDutyReserveTax("");
-            }else {
-                addCurrencyStampDutyReserveTax(row[16]);
+            if (row[16].isEmpty()) {
+                temp.setCurrencyofStampDuty("");
+            } else {
+                temp.setCurrencyofStampDuty(row[16]);
             }
             System.out.println(row[16]);
-            if (row[17].isEmpty()){
-                addNotes("");
-            }else{
-                addNotes(row[17]);
+            if (row[17].isEmpty()) {
+                temp.setNotes("");
+            } else {
+                temp.setNotes(row[17]);
             }
-            addID(row[18]);
-            if(row.length > 19) {
+            if (row.length > 19) {
                 if (row[19].isEmpty()) {
-                    addCurrencyConversionFee(0.0);
+                    temp.setConversionFee(0.0);
                 } else {
-                    addCurrencyConversionFee(Double.parseDouble(row[19]));
+                    temp.setConversionFee(Double.parseDouble(row[19]));
                 }
                 if (row[20].isEmpty()) {
-                    addCurrencyCurrencyConversionFee("");
+                    temp.setCurrencyConversionFee("");
                 } else {
-                    addCurrencyCurrencyConversionFee("");
+                    temp.setCurrencyConversionFee("");
                 }
-            }else{
-                addCurrencyConversionFee(0.0);
-                addCurrencyCurrencyConversionFee("");
+            } else {
+                temp.setConversionFee(0.0);
+                temp.setCurrencyConversionFee("");
             }
             count++;
             System.out.println(count);
+            //Add our temp Take_Data to our Arraylist of Take_Data
+            fullData.add(temp);
         }
 
 
-
-        System.out.println(count);
+        return fullData;
     }
+
 
     public static void main(String[] args) throws IOException {
-        readFile();
+        ArrayList<Take_Data> dataList = Take_Data.readFile();
+        for (Take_Data data : dataList) {
+            System.out.println(data.getName() + ": " + data.getResult());
+        }
     }
-
-
 }
