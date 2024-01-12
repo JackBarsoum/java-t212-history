@@ -1,5 +1,3 @@
-//Issue with code at the moment is error when there is a lot of empty columns can result in out of bounds errors.
-
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
