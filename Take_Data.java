@@ -2,98 +2,14 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Take_Data {
-    //                  GETTER AND SETTER METHODS
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setISIN(String ISIN) {
-        this.ISIN = ISIN;
-    }
-
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNumOfShares(double numOfShares) {
-        this.numOfShares = numOfShares;
-    }
-
-    public void setPricePershare(double pricePershare) {
-        this.pricePershare = pricePershare;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public void setExchangeRate(double exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public void setResult(double result) {
-        this.result = result;
-    }
-
-    public void setCurrencyofResult(String currencyofResult) {
-        this.currencyofResult = currencyofResult;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public void setCurrencyofTotal(String currencyofTotal) {
-        this.currencyofTotal = currencyofTotal;
-    }
-
-    public void setWithholdingTax(double withholdingTax) {
-        this.withholdingTax = withholdingTax;
-    }
-
-    public void setCurrencyofWithholdingTax(String currencyofWithholdingTax) {
-        this.currencyofWithholdingTax = currencyofWithholdingTax;
-    }
-
-    public void setStampDuty(double stampDuty) {
-        this.stampDuty = stampDuty;
-    }
-
-    public void setCurrencyofStampDuty(String currencyofStampDuty) {
-        this.currencyofStampDuty = currencyofStampDuty;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public void setConversionFee(double conversionFee) {
-        this.conversionFee = conversionFee;
-    }
-
-    public void setCurrencyConversionFee(String currencyConversionFee) {
-        this.currencyConversionFee = currencyConversionFee;
-    }
-
+    //                  GETTER METHODS
     public String getAction() {
         return action;
     }
@@ -178,7 +94,7 @@ public class Take_Data {
         return currencyConversionFee;
     }
 
-    //                      END OF GETTER AND SETTER METHODS
+    //                      END OF GETTER METHODS
 
     //Instance variables
     private String action;
@@ -238,6 +154,7 @@ public class Take_Data {
         Scanner read = new Scanner(new File(csvFile));
         int count = 0;
         Take_Data temp;
+        Take_Data l = new Take_Data("","","","","",0.0,0.0,"",0.0,0.0,"",0.0,"",0.0,"",0.0,"","","",0.0,"");
         // Skip the header line if present
         if (read.hasNextLine()) {
             read.nextLine();
@@ -253,69 +170,64 @@ public class Take_Data {
             System.arraycopy(row, 0, newArray, 0, row.length);
 
             //Checks for null or empty string might make a helper method for this to clean code later
-            if(newArray[2] == null || newArray[2].trim().isEmpty())
+            if(l.improvedEmpty(newArray[2]))
             {
                 newArray[2] = "";
             }
-            if(newArray[3] == null || newArray[3].trim().isEmpty())
+            if(l.improvedEmpty(newArray[3]))
             {
                 newArray[3] = "";
             }
-            if(newArray[4] == null || newArray[4].trim().isEmpty())
+            if(l.improvedEmpty(newArray[4]))
             {
                 newArray[4] = "";
             }
-            if(newArray[5] == null || newArray[5].trim().isEmpty())
+            if(l.improvedEmpty(newArray[5]))
             {
                 newArray[5] = "0.0";
             }
-            if(newArray[6] == null || newArray[6].trim().isEmpty())
+            if(l.improvedEmpty(newArray[6]))
             {
                 newArray[6] = "0.0";
             }
-            if(newArray[7] == null || newArray[7].trim().isEmpty())
+            if(l.improvedEmpty(newArray[7]))
             {
                 newArray[7] = "";
             }
-            if (newArray[8] == null || Objects.equals(newArray[8], "Not available") || newArray[8].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[8]) || Objects.equals(newArray[8], "Not available")) {
                 newArray[8] = "0.0";
             }
-            if (newArray[9] == null  || newArray[9].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[9])) {
                 newArray[9] = "0.0";
             }
-            if(newArray[10] == null || newArray[10].trim().isEmpty())
+            if(l.improvedEmpty(newArray[10]))
             {
                 newArray[10] = "";
             }
-            if (newArray[13] == null  || newArray[13].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[13])) {
                 newArray[13] = "0.0";
             }
-            if (newArray[14] == null  || newArray[14].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[14])) {
                 newArray[14] = "";
             }
-            if (newArray[15] == null  || newArray[15].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[15])) {
                 newArray[15] = "0.0";
             }
-            if (newArray[16] == null  || newArray[16].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[16])) {
                 newArray[16] = "";
             }
-            if (newArray[17] == null  || newArray[17].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[17])) {
                 newArray[17] = "";
             }
-            if (newArray[18] == null  || newArray[18].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[18])) {
                 newArray[18] = "";
             }
 
-            if ( newArray[19] == null  || newArray[19].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[19])) {
                     newArray[19] = "0.0";
             }
-            if (newArray[20] == null  || newArray[20].trim().isEmpty()) {
+            if (l.improvedEmpty(newArray[20])) {
                     newArray[20] = "";
-            }
-
-            //Print out the current row for testing purposes
-            for (int i = 0; i < newArray.length; i++){
-                System.out.println(newArray[i]);
             }
             temp = new Take_Data(newArray[0], newArray[1], newArray[2], newArray[3], newArray[4], Double.parseDouble(newArray[5]), Double.parseDouble(newArray[6]), row[7], Double.parseDouble(newArray[8]), Double.parseDouble(newArray[9]), newArray[10], Double.parseDouble(newArray[11]), newArray[12], Double.parseDouble(newArray[13]), newArray[14], Double.parseDouble(newArray[15]), newArray[16], newArray[17], newArray[18], Double.parseDouble(newArray[19]), newArray[20]);
             count++;
@@ -327,11 +239,44 @@ public class Take_Data {
         return fullData;
     }
 
+    public boolean improvedEmpty(String p)
+    {
+        return (p == null ||p.trim().isEmpty());
+    }
+
+    public static String totalProfit(ArrayList<Take_Data> fulldata)
+    {
+        double profit = 0.0;
+        for (Take_Data data: fulldata)
+        {
+            profit += data.getResult();
+        }
+        DecimalFormat df = new DecimalFormat("#.##"); // Specify the number of decimal places
+        String roundedProfit = df.format(profit);
+        return "Your total profit from trading was: "+roundedProfit;
+    }
+
+    public static String biggestTrade(ArrayList<Take_Data> fulldata)
+    {
+        double max = 0.0;
+        String ticker = "";
+        String name = "";
+        for (Take_Data data: fulldata)
+        {
+             if(max < data.getResult())
+             {
+                 max = data.getResult();
+                 ticker = data.getTicker();
+                 name = data.getName();
+             }
+        }
+        return "Your biggest trade that made you the most profit is: "+max+ ". The name of the stock is "+name+", with ticker: "+ticker;
+    }
+
 
     public static void main(String[] args) throws IOException {
         ArrayList<Take_Data> dataList = Take_Data.readFile();
-        for (Take_Data data : dataList) {
-            System.out.println(data.getName() + ": " + data.getResult());
+        System.out.println(Take_Data.totalProfit(dataList));
+        System.out.println(Take_Data.biggestTrade(dataList));
         }
     }
-}
