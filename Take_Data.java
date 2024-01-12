@@ -232,7 +232,7 @@ public class Take_Data {
 
     public static ArrayList<Take_Data> readFile() throws IOException {
         ArrayList<Take_Data> fullData = new ArrayList<Take_Data>();
-        String csvFile = "C:/Users/Jack Barsoum/IdeaProjects/T212/src";
+        String csvFile = "C:/Users/jackb/Downloads/2023-2024.csv";
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
         int count = 0;
@@ -241,66 +241,82 @@ public class Take_Data {
         if (read.hasNextLine()) {
             read.nextLine();
         }
+        //Size of each row
+        String[] newArray = new String[21];
 
         while (read.hasNextLine()) {
             String line = read.nextLine();
             String[] row = line.split(cvsSplitBy);
-            //Create a new Take_Data some of the values are defaulted now and are set later after checks
-            temp = new Take_Data(row[0], row[1], row[2], row[3], row[4], Double.parseDouble(row[5]), Double.parseDouble(row[6]), row[7], -1, 0, row[10], Double.parseDouble(row[11]), row[12], 0, "", 0, "", "", row[18], 0, "");
-            //if not avaible let exhange = -1
-            if (Objects.equals(row[8], "Not available")) {
-                temp.setExchangeRate(-1);
-            } else {
-                temp.setExchangeRate(Double.parseDouble(row[8]));
+            //Copy current row into our Array this ensures it is always the same size
+            System.arraycopy(row, 0, newArray, 0, row.length);
+
+            //Checks for null or empty string might make a helper method for this to clean code later
+            if(newArray[2] == null || newArray[2].trim().isEmpty())
+            {
+                newArray[2] = "";
             }
-            if (row[9].isEmpty()) {
-                temp.setResult(0.0);
-            } else {
-                temp.setResult(Double.parseDouble(row[9]));
+            if(newArray[3] == null || newArray[3].trim().isEmpty())
+            {
+                newArray[3] = "";
             }
-            if (row[13].isEmpty()) {
-                temp.setWithholdingTax(0.0);
-            } else {
-                temp.setWithholdingTax(Double.parseDouble(row[13]));
+            if(newArray[4] == null || newArray[4].trim().isEmpty())
+            {
+                newArray[4] = "";
             }
-            if (row[14].isEmpty()) {
-                temp.setCurrencyofWithholdingTax("");
-            } else {
-                temp.setCurrencyofWithholdingTax(row[14]);
+            if(newArray[5] == null || newArray[4].trim().isEmpty())
+            {
+                newArray[5] = "0.0";
             }
-            if (row[15].isEmpty()) {
-                temp.setStampDuty(0.0);
-            } else {
-                temp.setStampDuty(Double.parseDouble(row[15]));
+            if(newArray[6] == null || newArray[5].trim().isEmpty())
+            {
+                newArray[6] = "0.0";
             }
-            if (row[16].isEmpty()) {
-                temp.setCurrencyofStampDuty("");
-            } else {
-                temp.setCurrencyofStampDuty(row[16]);
+            if(newArray[7] == null || newArray[7].trim().isEmpty())
+            {
+                newArray[7] = "";
             }
-            System.out.println(row[16]);
-            if (row[17].isEmpty()) {
-                temp.setNotes("");
-            } else {
-                temp.setNotes(row[17]);
+            if (newArray[8] == null || Objects.equals(newArray[8], "Not available") ) {
+                newArray[8] = "0.0";
             }
-            if (row.length > 19) {
-                if (row[19].isEmpty()) {
-                    temp.setConversionFee(0.0);
-                } else {
-                    temp.setConversionFee(Double.parseDouble(row[19]));
-                }
-                if (row[20].isEmpty()) {
-                    temp.setCurrencyConversionFee("");
-                } else {
-                    temp.setCurrencyConversionFee("");
-                }
-            } else {
-                temp.setConversionFee(0.0);
-                temp.setCurrencyConversionFee("");
+            if (newArray[9] == null  || newArray[9].trim().isEmpty()) {
+                newArray[9] = "0.0";
             }
+            if(newArray[10] == null || newArray[10].trim().isEmpty())
+            {
+                newArray[10] = "";
+            }
+            if (newArray[13] == null  || newArray[13].trim().isEmpty()) {
+                newArray[13] = "0.0";
+            }
+            if (newArray[14] == null  || newArray[14].trim().isEmpty()) {
+                newArray[14] = "";
+            }
+            if (newArray[15] == null  || newArray[15].trim().isEmpty()) {
+                newArray[15] = "0.0";
+            }
+            if (newArray[16] == null  || newArray[16].trim().isEmpty()) {
+                newArray[16] = "";
+            }
+            if (newArray[17] == null  || newArray[17].trim().isEmpty()) {
+                newArray[17] = "";
+            }
+            if (newArray[18] == null  || newArray[18].trim().isEmpty()) {
+                newArray[18] = "";
+            }
+
+            if ( newArray[19] == null  || newArray[19].trim().isEmpty()) {
+                    newArray[19] = "0.0";
+            }
+            if (newArray[20] == null  || newArray[20].trim().isEmpty()) {
+                    newArray[20] = "";
+            }
+
+            //Print out the current row for testing purposes
+            for (int i = 0; i < row.length; i++){
+                System.out.println(row[i]);
+            }
+            temp = new Take_Data(newArray[0], newArray[1], newArray[2], newArray[3], newArray[4], Double.parseDouble(newArray[5]), Double.parseDouble(newArray[6]), row[7], Double.parseDouble(newArray[8]), Double.parseDouble(newArray[9]), newArray[10], Double.parseDouble(newArray[11]), newArray[12], Double.parseDouble(newArray[13]), newArray[14], Double.parseDouble(newArray[15]), newArray[16], newArray[17], newArray[18], Double.parseDouble(newArray[19]), newArray[20]);
             count++;
-            System.out.println(count);
             //Add our temp Take_Data to our Arraylist of Take_Data
             fullData.add(temp);
         }
