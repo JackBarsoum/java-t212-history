@@ -3,6 +3,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -247,6 +248,7 @@ public class Take_Data {
         while (read.hasNextLine()) {
             String line = read.nextLine();
             String[] row = line.split(cvsSplitBy);
+            Arrays.fill(newArray, null);
             //Copy current row into our Array this ensures it is always the same size
             System.arraycopy(row, 0, newArray, 0, row.length);
 
@@ -263,11 +265,11 @@ public class Take_Data {
             {
                 newArray[4] = "";
             }
-            if(newArray[5] == null || newArray[4].trim().isEmpty())
+            if(newArray[5] == null || newArray[5].trim().isEmpty())
             {
                 newArray[5] = "0.0";
             }
-            if(newArray[6] == null || newArray[5].trim().isEmpty())
+            if(newArray[6] == null || newArray[6].trim().isEmpty())
             {
                 newArray[6] = "0.0";
             }
@@ -275,7 +277,7 @@ public class Take_Data {
             {
                 newArray[7] = "";
             }
-            if (newArray[8] == null || Objects.equals(newArray[8], "Not available") ) {
+            if (newArray[8] == null || Objects.equals(newArray[8], "Not available") || newArray[8].trim().isEmpty()) {
                 newArray[8] = "0.0";
             }
             if (newArray[9] == null  || newArray[9].trim().isEmpty()) {
@@ -312,8 +314,8 @@ public class Take_Data {
             }
 
             //Print out the current row for testing purposes
-            for (int i = 0; i < row.length; i++){
-                System.out.println(row[i]);
+            for (int i = 0; i < newArray.length; i++){
+                System.out.println(newArray[i]);
             }
             temp = new Take_Data(newArray[0], newArray[1], newArray[2], newArray[3], newArray[4], Double.parseDouble(newArray[5]), Double.parseDouble(newArray[6]), row[7], Double.parseDouble(newArray[8]), Double.parseDouble(newArray[9]), newArray[10], Double.parseDouble(newArray[11]), newArray[12], Double.parseDouble(newArray[13]), newArray[14], Double.parseDouble(newArray[15]), newArray[16], newArray[17], newArray[18], Double.parseDouble(newArray[19]), newArray[20]);
             count++;
