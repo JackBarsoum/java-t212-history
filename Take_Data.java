@@ -101,27 +101,27 @@ public class Take_Data {
     //                      END OF GETTER METHODS
 
     //Instance variables
-    private String action;
-    private String time;
-    private String ISIN;
-    private String ticker;
-    private String name;
-    private double numOfShares;
-    private double pricePershare;
-    private String currency;
-    private double exchangeRate;
-    private double result;
-    private String currencyofResult;
-    private double total;
-    private String currencyofTotal;
-    private double withholdingTax;
-    private String currencyofWithholdingTax;
-    private double stampDuty;
-    private String currencyofStampDuty;
-    private String notes;
-    private String ID;
-    private double conversionFee;
-    private String currencyConversionFee;
+    private final String action;
+    private final String time;
+    private final String ISIN;
+    private final String ticker;
+    private final String name;
+    private final double numOfShares;
+    private final double pricePershare;
+    private final String currency;
+    private final double exchangeRate;
+    private final double result;
+    private final String currencyofResult;
+    private final double total;
+    private final String currencyofTotal;
+    private final double withholdingTax;
+    private final String currencyofWithholdingTax;
+    private final double stampDuty;
+    private final String currencyofStampDuty;
+    private final String notes;
+    private final String ID;
+    private final double conversionFee;
+    private final String currencyConversionFee;
 
 
     //Constructor
@@ -151,13 +151,14 @@ public class Take_Data {
         this.currencyConversionFee = currofConversion;
     }
 
+
     public static ArrayList<Take_Data> readFile() throws IOException {
-        ArrayList<Take_Data> fullData = new ArrayList<Take_Data>();
+        ArrayList<Take_Data> fullData = new ArrayList<>();
         //**  To be replaced with prompt for user to enter in the file path  **
         String csvFile = "C:/Users/jackb/Downloads/2023-2024.csv";
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
-        int count = 0;
+
         Take_Data temp;
         Take_Data l = new Take_Data("","","","","",0.0,0.0,"",0.0,0.0,"",0.0,"",0.0,"",0.0,"","","",0.0,"");
         // Skip the header line if present
@@ -235,7 +236,6 @@ public class Take_Data {
                     newArray[20] = "";
             }
             temp = new Take_Data(newArray[0], newArray[1], newArray[2], newArray[3], newArray[4], Double.parseDouble(newArray[5]), Double.parseDouble(newArray[6]), row[7], Double.parseDouble(newArray[8]), Double.parseDouble(newArray[9]), newArray[10], Double.parseDouble(newArray[11]), newArray[12], Double.parseDouble(newArray[13]), newArray[14], Double.parseDouble(newArray[15]), newArray[16], newArray[17], newArray[18], Double.parseDouble(newArray[19]), newArray[20]);
-            count++;
             //Add our temp Take_Data to our Arraylist of Take_Data
             fullData.add(temp);
         }
@@ -292,14 +292,12 @@ public class Take_Data {
     //Method to group all of our trades under the key of a ticker using a hashmap
     public static String pairedTrade(ArrayList<Take_Data> fulldata)
     {
-        //Make a list with our Arraylist of data
-        List<Take_Data> dataListgroup = fulldata;
 
         //Create a hashmap with format String using our data
         Map<String, List<Take_Data>> groupedDataList = new HashMap<>();
 
         //Go through all the data in our list
-        for (Take_Data data: dataListgroup)
+        for (Take_Data data: fulldata)
         {
             //Get the current ticker
             String tickersymbol = data.getTicker();
