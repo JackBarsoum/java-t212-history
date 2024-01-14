@@ -1,10 +1,16 @@
+/*************************************************************
+ *                Trading212 History Reader                  *
+ *                   By: Jack Barsoum &                      *
+ *                       Oisin Lynch                         *
+ *                    Last Updated: 14/01/2024               *
+ *************************************************************
+ */
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class Take_Data {
     //                  GETTER METHODS
@@ -147,6 +153,7 @@ public class Take_Data {
 
     public static ArrayList<Take_Data> readFile() throws IOException {
         ArrayList<Take_Data> fullData = new ArrayList<Take_Data>();
+        //**  To be replaced with prompt for user to enter in the file path  **
         String csvFile = "C:/Users/jackb/Downloads/2023-2024.csv";
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
@@ -237,11 +244,21 @@ public class Take_Data {
         return fullData;
     }
 
+    //Helper method to make code look neater
     public boolean improvedEmpty(String p)
     {
         return (p == null ||p.trim().isEmpty());
     }
 
+
+    //**Need to make look nicer in the future**
+    @Override
+    public String toString()
+    {
+        return "Action: \t\t\t At time: \t\t\t Stock Name: \t\t\t With Ticker: \t Shares: \t Price/Share: \t Currency: \t Exchange Rate:  \t Result: \t Total:  \t Currency Conversion Fee: \t Withholding Tax: \t Stamp duty: \n" +getAction()+" "+getTime()+" "+getName()+" "+getTicker()+" "+getNumOfShares()+" "+getPricePershare()+" "+getCurrency()+" "+getExchangeRate()+" "+getResult()+" "+getTotal()+" "+getCurrencyConversionFee()+" "+getWithholdingTax()+" "+getStampDuty();
+    }
+
+    //Method to get total profit made from history
     public static String totalProfit(ArrayList<Take_Data> fulldata)
     {
         double profit = 0.0;
@@ -254,6 +271,7 @@ public class Take_Data {
         return "Your total profit from trading was: "+roundedProfit;
     }
 
+    //Method to get the most amount of money made in a single trade
     public static String biggestTrade(ArrayList<Take_Data> fulldata)
     {
         double max = 0.0;
@@ -271,10 +289,66 @@ public class Take_Data {
         return "Your biggest trade that made you the most profit is: "+max+ ". The name of the stock is "+name+", with ticker: "+ticker;
     }
 
+    //Method to group all of our trades under the key of a ticker using a hashmap
+    public static String pairedTrade(ArrayList<Take_Data> fulldata)
+    {
+        //Make a list with our Arraylist of data
+        List<Take_Data> dataListgroup = fulldata;
+
+        //Create a hashmap with format String using our data
+        Map<String, List<Take_Data>> groupedDataList = new HashMap<>();
+
+        //Go through all the data in our list
+        for (Take_Data data: dataListgroup)
+        {
+            //Get the current ticker
+            String tickersymbol = data.getTicker();
+            //If our hashmap contains the ticker already
+            if(groupedDataList.containsKey(tickersymbol))
+            {
+                //Go to our saved ticker symbol and add the data for that ticker onto it
+                groupedDataList.get(tickersymbol).add(data);
+            }
+            //If we have not encountered the ticker before
+            else
+            {
+                //Create a new arraylist and add our data to it and add that data to our newly inputted ticker
+                List<Take_Data> newsymbol = new ArrayList<>();
+                newsymbol.add(data);
+                groupedDataList.put(tickersymbol, newsymbol);
+            }
+        }
+
+        //Iterate through our keys in our hashmap
+        for (String tickerSymbol: groupedDataList.keySet())
+        {
+            //Get the data for the ticker symbol and make it a list
+            List<Take_Data> data = groupedDataList.get(tickerSymbol);
+
+            //If the current symbol is empty then it is an interest
+            if (tickerSymbol.trim().isEmpty())
+            {
+                System.out.println("Interest: ");
+            }
+            else {
+                System.out.println("Ticker: " + tickerSymbol);
+            }
+            //Go through our data and print out its toString method
+            for (Take_Data data1 : data)
+            {
+                System.out.println("" + data1);
+            }
+            System.out.println();
+        }
+        //Blank return
+        return "";
+    }
+
 
     public static void main(String[] args) throws IOException {
         ArrayList<Take_Data> dataList = Take_Data.readFile();
         System.out.println(Take_Data.totalProfit(dataList));
         System.out.println(Take_Data.biggestTrade(dataList));
+        System.out.println(pairedTrade(dataList));
         }
     }
