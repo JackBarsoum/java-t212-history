@@ -5,6 +5,8 @@
  *                    Last Updated: 14/01/2024               *
  *************************************************************
  */
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -20,10 +22,6 @@ public class Take_Data {
 
     public String getTime() {
         return time;
-    }
-
-    public String getISIN() {
-        return ISIN;
     }
 
     public String getTicker() {
@@ -54,44 +52,8 @@ public class Take_Data {
         return result;
     }
 
-    public String getCurrencyofResult() {
-        return currencyofResult;
-    }
-
     public double getTotal() {
         return total;
-    }
-
-    public String getCurrencyofTotal() {
-        return currencyofTotal;
-    }
-
-    public double getWithholdingTax() {
-        return withholdingTax;
-    }
-
-    public String getCurrencyofWithholdingTax() {
-        return currencyofWithholdingTax;
-    }
-
-    public double getStampDuty() {
-        return stampDuty;
-    }
-
-    public String getCurrencyofStampDuty() {
-        return currencyofStampDuty;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public double getConversionFee() {
-        return conversionFee;
     }
 
     public String getCurrencyConversionFee() {
@@ -103,7 +65,6 @@ public class Take_Data {
     //Instance variables
     private final String action;
     private final String time;
-    private final String ISIN;
     private final String ticker;
     private final String name;
     private final double numOfShares;
@@ -111,16 +72,7 @@ public class Take_Data {
     private final String currency;
     private final double exchangeRate;
     private final double result;
-    private final String currencyofResult;
     private final double total;
-    private final String currencyofTotal;
-    private final double withholdingTax;
-    private final String currencyofWithholdingTax;
-    private final double stampDuty;
-    private final String currencyofStampDuty;
-    private final String notes;
-    private final String ID;
-    private final double conversionFee;
     private final String currencyConversionFee;
 
 
@@ -130,7 +82,6 @@ public class Take_Data {
                      String curroftax, double stamp, String stampcur, String note, String identifier, double conversion, String currofConversion) {
         this.action = a;
         this.time = t;
-        this.ISIN = I;
         this.ticker = tick;
         this.name = n;
         this.numOfShares = num;
@@ -138,16 +89,7 @@ public class Take_Data {
         this.currency = cur;
         this.exchangeRate = exc;
         this.result = res;
-        this.currencyofResult = curres;
         this.total = tot;
-        this.currencyofTotal = curroft;
-        this.withholdingTax = withtax;
-        this.currencyofWithholdingTax = curroftax;
-        this.stampDuty = stamp;
-        this.currencyofStampDuty = stampcur;
-        this.notes = note;
-        this.ID = identifier;
-        this.conversionFee = conversion;
         this.currencyConversionFee = currofConversion;
     }
 
@@ -155,7 +97,7 @@ public class Take_Data {
     public static ArrayList<Take_Data> readFile() throws IOException {
         ArrayList<Take_Data> fullData = new ArrayList<>();
         //**  To be replaced with prompt for user to enter in the file path  **
-        String csvFile = "C:/Users/jackb/Downloads/2023-2024.csv";
+        String csvFile = "C:\\Users\\Jack Barsoum\\Downloads\\2023-2024.csv";
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
 
@@ -251,11 +193,10 @@ public class Take_Data {
     }
 
 
-    //**Need to make look nicer in the future**
     @Override
     public String toString()
     {
-        return "Action: \t\t\t At time: \t\t\t Stock Name: \t\t\t With Ticker: \t Shares: \t Price/Share: \t Currency: \t Exchange Rate:  \t Result: \t Total:  \t Currency Conversion Fee: \t Withholding Tax: \t Stamp duty: \n" +getAction()+" "+getTime()+" "+getName()+" "+getTicker()+" "+getNumOfShares()+" "+getPricePershare()+" "+getCurrency()+" "+getExchangeRate()+" "+getResult()+" "+getTotal()+" "+getCurrencyConversionFee()+" "+getWithholdingTax()+" "+getStampDuty();
+        return "<html>Action: "+getAction()+"<br/>At time: "+ getTime()+"<br/>Stock Name: "+getName()+"<br/>With Ticker: "+getTicker()+"<br/>Shares: "+getNumOfShares()+"<br/>Price/Share: "+getPricePershare()+"<br/>Currency: "+getCurrency()+"<br/>Exchange Rate: "+getExchangeRate()+"<br/>Result: "+getResult()+"<br/>Total: "+getTotal()+"<br/>Currency Conversion Fee: "+getCurrencyConversionFee()+"<html>";
     }
 
     //Method to get total profit made from history
@@ -290,9 +231,9 @@ public class Take_Data {
     }
 
     //Method to group all of our trades under the key of a ticker using a hashmap
-    public static String pairedTrade(ArrayList<Take_Data> fulldata)
+    //And create a popup window with compiled results
+    public static void pairedTrade(ArrayList<Take_Data> fulldata, JPanel jpanel)
     {
-
         //Create a hashmap with format String using our data
         Map<String, List<Take_Data>> groupedDataList = new HashMap<>();
 
@@ -320,33 +261,42 @@ public class Take_Data {
         //Iterate through our keys in our hashmap
         for (String tickerSymbol: groupedDataList.keySet())
         {
+            JPanel currentRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
+            currentRow.setBackground(Color.BLACK);
+            JLabel tickerlabel = new JLabel(tickerSymbol);
+            tickerlabel.setForeground(Color.WHITE);
+            tickerlabel.setFont(new Font("Serif", Font.PLAIN, 20));
             //Get the data for the ticker symbol and make it a list
             List<Take_Data> data = groupedDataList.get(tickerSymbol);
+            currentRow.add(tickerlabel);
 
-            //If the current symbol is empty then it is an interest
-            if (tickerSymbol.trim().isEmpty())
-            {
-                System.out.println("Interest: ");
-            }
-            else {
-                System.out.println("Ticker: " + tickerSymbol);
-            }
             //Go through our data and print out its toString method
             for (Take_Data data1 : data)
             {
-                System.out.println("" + data1);
+                JLabel label = new JLabel();
+                label.setFont(new Font("Serif", Font.PLAIN, 13));
+                label.setForeground(Color.WHITE);
+                label.setText(data1.toString());
+                currentRow.add(label);
             }
-            System.out.println();
+            jpanel.add(currentRow);
         }
-        //Blank return
-        return "";
     }
 
 
     public static void main(String[] args) throws IOException {
+        JFrame frame = new JFrame("Compiled Data");
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         ArrayList<Take_Data> dataList = Take_Data.readFile();
-        System.out.println(Take_Data.totalProfit(dataList));
-        System.out.println(Take_Data.biggestTrade(dataList));
-        System.out.println(pairedTrade(dataList));
+        pairedTrade(dataList,panel);
+        JScrollPane scrollpane = new JScrollPane(panel);
+        scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        frame.add(scrollpane, BorderLayout.CENTER);
+        frame.setSize(1080, 700);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
         }
     }
