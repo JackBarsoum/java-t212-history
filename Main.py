@@ -53,14 +53,13 @@ class LeftColumn(ctk.CTkFrame):
         self.adder_button = ctk.CTkButton(self.leftTopFrame, text="+", bg_color='grey', fg_color='grey', text_color='green', width=10, height=10, corner_radius=10, command=self.open_stock_chooser)
         self.adder_button.pack(side='right', pady=10)
 
-        self.stocksFrame = ctk.CTkFrame(self, width=10)
-        self.stocksFrame.pack(fill='both', expand=False, pady=10)
-
+        self.stocksFrame = ctk.CTkScrollableFrame(self, width=10)
+        self.stocksFrame.pack(fill='both', expand=True, pady=10),
     def open_stock_chooser(self):
         hp.create_window(self)
 
     def set_middle_column(self, middle_column):
-        self.middle_column = middle_column    
+        self.middle_column = middle_column
 
     def create_stockBox(self, ticker, tickerPrice, flag):
         stock_box = ctk.CTkFrame(self.stocksFrame, height=50, width=10)
