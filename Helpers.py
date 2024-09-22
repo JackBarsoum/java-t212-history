@@ -36,11 +36,12 @@ class Extra(ctk.CTkToplevel):
         ticker = self.search_entry.get().strip().upper()
         global current
         current = ticker
-        if ticker in main.tickerMap:
+        if ticker in main.tickersSeen:
             messagebox.showwarning("Warning", "Stock already selected")
             return
         result = self.fetch_stock_data(ticker)
         if result:
+            main.tickersSeen.append(ticker)
             self.search_entry.delete(0, tk.END)
             self.add_stock_to_parent(ticker, actStock)
         else:
@@ -52,28 +53,28 @@ class Extra(ctk.CTkToplevel):
         self.destroy()
 
 def getStockPrice(stock):
-        ticker = stock
+    ticker = stock
 
-        # Try to fetch data for today
-        stockPrice = ticker.history(period='1d')
+    # Try to fetch data for today
+    stockPrice = ticker.history(period='1d')
 
-        # If no data for today, fetch data for the previous days until one is found
-        if stockPrice.empty:
-            for i in range(2, 5):  # Adjust the range based on your needs
-                stockPrice = ticker.history(period=f'{i}d')
-                if not stockPrice.empty:
-                    break
+    # If no data for today, fetch data for the previous days until one is found
+    if stockPrice.empty:
+        for i in range(2, 5):  # Adjust the range based on your needs
+            stockPrice = ticker.history(period=f'{i}d')
+            if not stockPrice.empty:
+                break
 
-        if stockPrice.empty:
-            raise ValueError(f"No data available for {stock} for today or the past 4 days.")
+    if stockPrice.empty:
+        raise ValueError(f"No data available for {stock} for today or the past 4 days.")
 
-        # Get the latest available close price
-        latest_price = stockPrice['Close'].iloc[-1]
+    # Get the latest available close price
+    latest_price = stockPrice['Close'].iloc[-1]
 
-        return latest_price    
+    return latest_price
 
 def create_window(parent):
     stock_chooser_window = Extra(parent)
     stock_chooser_window.mainloop()
 
-        
+

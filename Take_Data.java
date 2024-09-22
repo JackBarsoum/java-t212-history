@@ -94,10 +94,10 @@ public class Take_Data {
     }
 
 
-    public static ArrayList<Take_Data> readFile() throws IOException {
+    public static ArrayList<Take_Data> readFile(String fillingCab) throws IOException {
         ArrayList<Take_Data> fullData = new ArrayList<>();
         //**  To be replaced with prompt for user to enter in the file path  **
-        String csvFile = "C:\\Users\\Jack Barsoum\\Downloads\\2023-2024.csv";
+        String csvFile = fillingCab;
         String cvsSplitBy = ",";
         Scanner read = new Scanner(new File(csvFile));
 
@@ -172,10 +172,10 @@ public class Take_Data {
             }
 
             if (l.improvedEmpty(newArray[19])) {
-                    newArray[19] = "0.0";
+                newArray[19] = "0.0";
             }
             if (l.improvedEmpty(newArray[20])) {
-                    newArray[20] = "";
+                newArray[20] = "";
             }
             temp = new Take_Data(newArray[0], newArray[1], newArray[2], newArray[3], newArray[4], Double.parseDouble(newArray[5]), Double.parseDouble(newArray[6]), row[7], Double.parseDouble(newArray[8]), Double.parseDouble(newArray[9]), newArray[10], Double.parseDouble(newArray[11]), newArray[12], Double.parseDouble(newArray[13]), newArray[14], Double.parseDouble(newArray[15]), newArray[16], newArray[17], newArray[18], Double.parseDouble(newArray[19]), newArray[20]);
             //Add our temp Take_Data to our Arraylist of Take_Data
@@ -220,12 +220,12 @@ public class Take_Data {
         String name = "";
         for (Take_Data data: fulldata)
         {
-             if(max < data.getResult())
-             {
-                 max = data.getResult();
-                 ticker = data.getTicker();
-                 name = data.getName();
-             }
+            if(max < data.getResult())
+            {
+                max = data.getResult();
+                ticker = data.getTicker();
+                name = data.getName();
+            }
         }
         return "Your biggest trade that made you the most profit is: "+max+ ". The name of the stock is "+name+", with ticker: "+ticker;
     }
@@ -290,7 +290,7 @@ public class Take_Data {
         panel.setBackground(Color.BLACK);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        ArrayList<Take_Data> dataList = Take_Data.readFile();
+        ArrayList<Take_Data> dataList = Take_Data.readFile(args[0]);
         pairedTrade(dataList,panel);
         JScrollPane scrollpane = new JScrollPane(panel);
         scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -298,5 +298,5 @@ public class Take_Data {
         frame.setSize(1080, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        }
     }
+}

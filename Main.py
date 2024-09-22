@@ -3,10 +3,9 @@ import Helpers as hp
 import StockGraph as sg
 import csvHelpers as csvH
 
-global tickerMap
-tickerMap = {}
-global csvLocation
 
+tickerMap = {}
+tickersSeen = []
 class Main(ctk.CTk):
     def __init__(self, title):
         super().__init__()
@@ -53,14 +52,13 @@ class LeftColumn(ctk.CTkFrame):
         self.adder_button = ctk.CTkButton(self.leftTopFrame, text="+", bg_color='grey', fg_color='grey', text_color='green', width=10, height=10, corner_radius=10, command=self.open_stock_chooser)
         self.adder_button.pack(side='right', pady=10)
 
-        self.stocksFrame = ctk.CTkFrame(self, width=10)
-        self.stocksFrame.pack(fill='both', expand=False, pady=10)
-
+        self.stocksFrame = ctk.CTkScrollableFrame(self, width=10)
+        self.stocksFrame.pack(fill='both', expand=True, pady=10),
     def open_stock_chooser(self):
         hp.create_window(self)
 
     def set_middle_column(self, middle_column):
-        self.middle_column = middle_column    
+        self.middle_column = middle_column
 
     def create_stockBox(self, ticker, tickerPrice, flag):
         stock_box = ctk.CTkFrame(self.stocksFrame, height=50, width=10)
@@ -109,7 +107,6 @@ class MiddleColumn(ctk.CTkFrame):
 
         self.stock_graph_frame.grid_rowconfigure(0, weight=1)
         self.stock_graph_frame.grid_columnconfigure(0, weight=1)
-        # (Add other UI elements for the middle column)
 
 class RightColumn(ctk.CTkFrame):
     def __init__(self, parent, left_column):
@@ -124,6 +121,7 @@ class RightColumn(ctk.CTkFrame):
 
     def open_csvFinder(self):
         self.left_column.addStocksCsv()
-        # (Add other UI elements for the right column)
+
+# (Add other UI elements for the right column)
 if __name__ == "__main__":
     Main('Stock Viewer')

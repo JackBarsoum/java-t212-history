@@ -1,11 +1,16 @@
+import threading
+
 import customtkinter as ctk
 import Helpers as hp
 import StockGraph as sg
 import csvHelpers as csvH
+import subprocess
+import os
 
-global tickerMap
+from Global import get_csvLocationGlobal
+
 tickerMap = {}
-global csvLocation
+tickersSeen = []
 
 class Main(ctk.CTk):
     def __init__(self, title):
@@ -53,14 +58,13 @@ class LeftColumn(ctk.CTkFrame):
         self.adder_button = ctk.CTkButton(self.leftTopFrame, text="+", bg_color='grey', fg_color='grey', text_color='green', width=10, height=10, corner_radius=10, command=self.open_stock_chooser)
         self.adder_button.pack(side='right', pady=10)
 
-        self.stocksFrame = ctk.CTkFrame(self, width=10)
-        self.stocksFrame.pack(fill='both', expand=False, pady=10)
-
+        self.stocksFrame = ctk.CTkScrollableFrame(self, width=10)
+        self.stocksFrame.pack(fill='both', expand=True, pady=10),
     def open_stock_chooser(self):
         hp.create_window(self)
 
     def set_middle_column(self, middle_column):
-        self.middle_column = middle_column    
+        self.middle_column = middle_column
 
     def create_stockBox(self, ticker, tickerPrice, flag):
         stock_box = ctk.CTkFrame(self.stocksFrame, height=50, width=10)
@@ -115,7 +119,8 @@ class RightColumn(ctk.CTkFrame):
     def __init__(self, parent, left_column):
         super().__init__(parent)
         self.left_column = left_column
-        # Add UI elements for the right column here (watchlists, settings, etc.)
+
+        # UI Elements
         self.watchlist_label = ctk.CTkLabel(self, text="News")
         self.watchlist_label.pack()
 
@@ -124,6 +129,23 @@ class RightColumn(ctk.CTkFrame):
 
     def open_csvFinder(self):
         self.left_column.addStocksCsv()
-        # (Add other UI elements for the right column)
+        print("This is: " + get_csvLocationGlobal())
+
+        # Run Java program in a separate thread
+        java_thread = threading.Thread(target=self.run_java_program)
+        java_thread.start()
+
+    def run_java_program(self):
+        # Command to run the Java program
+        cmd = ['java', 'Take_Data', get_csvLocationGlobal()]
+        try:
+            # Use subprocess to start Java program
+            process = subprocess.Popen(cmd)
+            # Wait for the Java process to complete (optional, if you want to track its completion)
+            process.wait()
+        except Exception as e:
+            print(f"Error running Java program: {e}")
+
+# (Add other UI elements for the right column)
 if __name__ == "__main__":
     Main('Stock Viewer')
