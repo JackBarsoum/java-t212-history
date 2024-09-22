@@ -60,7 +60,7 @@ def getStockPrice(stock):
 
     # If no data for today, fetch data for the previous days until one is found
     if stockPrice.empty:
-        for i in range(2, 5):  # Adjust the range based on your needs
+        for i in range(2, 5):
             stockPrice = ticker.history(period=f'{i}d')
             if not stockPrice.empty:
                 break
